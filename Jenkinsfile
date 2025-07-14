@@ -12,7 +12,12 @@ pipeline {
 
     stages {
         stage('Checkout') { steps { checkout scm } }
-        stage('Maven Build') { steps { sh './mvnw clean package -DskipTests' } }
+        stage('Maven Build') {
+            steps {
+                sh 'chmod +x mvnw'          
+                sh './mvnw clean package -DskipTests'
+        }
+    }
         stage('Build Image') { steps { sh 'docker build -t $IMAGE_NAME:$VERSION .' } }
         stage('Publish Image') {
     steps {
