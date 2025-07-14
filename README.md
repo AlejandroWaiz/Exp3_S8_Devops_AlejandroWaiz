@@ -9,3 +9,5 @@ tercer push pq al parecer cambios al jenkins no actualizan el build xD
 cuarto push pq se me habia acabadoi la memoria y tuve que mover de carpeta el jenkins 
 
 se agregan limitaciones al build en el jenkinsfile ya que se chuó el 100 de la cpu en el ultimo build xD 
+
+sexto push limitando los rebuilds
