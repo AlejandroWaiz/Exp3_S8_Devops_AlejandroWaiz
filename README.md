@@ -13,3 +13,5 @@ se agregan limitaciones al build en el jenkinsfile ya que se chuó el 100 de la 
 sexto push limitando los rebuilds
 
 otro push
+
+ahora si que tuve que cambiar la ip publica
