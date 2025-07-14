@@ -15,12 +15,14 @@ pipeline {
         stage('Maven Build') { steps { sh './mvnw clean package -DskipTests' } }
         stage('Build Image') { steps { sh 'docker build -t $IMAGE_NAME:$VERSION .' } }
         stage('Publish Image') {
-            steps {
-                withDockerRegistry(credentialsId: 'dockerhub-creds') {
-                    sh 'docker push $IMAGE_NAME:$VERSION'
+    steps {
+        script {
+            docker.withRegistry('https://index.docker.io/v1/', 'dockerhub-creds') {
+                sh 'docker push $IMAGE_NAME:$VERSION'
                 }
             }
         }
+    }
         stage('Deploy') {
             steps {
                 sh '''
