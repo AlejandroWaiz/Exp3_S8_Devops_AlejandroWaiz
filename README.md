@@ -15,3 +15,5 @@ sexto push limitando los rebuilds
 otro push
 
 ahora si que tuve que cambiar la ip publica
+
+push final para demostracion de video
