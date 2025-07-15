@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         REGISTRY   = 'docker.io'
-        IMAGE_NAME = 'tusuario/vehiculos-api'
+        IMAGE_NAME = 'sirhipotermia/vehiculos-api'
         VERSION    = "v${BUILD_NUMBER}"
         DB_URL     = credentials('db_url')
         DB_USER    = credentials('db_user')
