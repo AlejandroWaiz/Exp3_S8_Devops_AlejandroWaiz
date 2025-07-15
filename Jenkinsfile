@@ -2,28 +2,25 @@ pipeline {
     agent any
 
     environment {
-        REGISTRY      = 'docker.io'
-        IMAGE_NAME    = 'tusuario/vehiculos-api'
-        VERSION       = "v${BUILD_NUMBER}"
-        DB_URL        = credentials('db_url')
-        DB_USER       = credentials('db_user')
-        DB_PASS       = credentials('db_pass')
+        REGISTRY   = 'docker.io'
+        IMAGE_NAME = 'tusuario/vehiculos-api'
+        VERSION    = "v${BUILD_NUMBER}"
+        DB_URL     = credentials('db_url')
+        DB_USER    = credentials('db_user')
+        DB_PASS    = credentials('db_pass')
     }
 
     options {
-        disableConcurrentBuilds()         
+        disableConcurrentBuilds()
         timeout(time: 30, unit: 'MINUTES')
     }
 
     stages {
-
-        stage('Checkout') {
-            steps { checkout scm }
-        }
+        stage('Checkout')    { steps { checkout scm } }
 
         stage('Maven Build') {
             steps {
-                sh 'chmod +x mvnw'                                     
+                sh 'chmod +x mvnw'
                 sh './mvnw -B -T1C -Dmaven.compiler.fork=true clean package -DskipTests'
             }
         }
@@ -31,8 +28,7 @@ pipeline {
         stage('Build Image') {
             steps {
                 sh '''
-                docker build \
-                  --memory 1g --cpus 0.8 \
+                docker build --memory 1g \
                   -t $IMAGE_NAME:$VERSION .
                 '''
             }
@@ -66,11 +62,10 @@ pipeline {
 
     post {
         always {
-            // limpia espacio y workspace
             sh 'docker system prune -af --volumes || true'
             cleanWs()
         }
-        success { echo 'Despliegue exitoso, nicee' }
-        failure { echo 'Algo falló; revisa el log' }
+        success { echo '✔ Despliegue exitoso' }
+        failure { echo '✖ Algo falló; revisa el log' }
     }
 }
