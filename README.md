@@ -17,3 +17,5 @@ otro push
 ahora si que tuve que cambiar la ip publica
 
 push final para demostracion de video
+
+push final ahora si que si
